@@ -1,0 +1,27 @@
+# Gambas Form File 3.0
+
+{ Form Form
+  MoveScaled(0,0,50,50)
+  Font = Font["-2"]
+  Background = &HBFBFBF&
+  Text = ("IRC")
+  { Button1 Button
+    MoveScaled(3,6,48,3)
+    Text = ("start")
+  }
+  { Label1 Label
+    MoveScaled(3,2,12,4)
+    Text = ("irc :ip")
+  }
+  { TextBox1 TextBox
+    MoveScaled(18,2,30,4)
+    Text = ("127.0.0.1")
+  }
+  { Timer1 #Timer
+    #MoveScaled(2,1)
+    Delay = 15000
+  }
+  { PictureBox1 PictureBox
+    MoveScaled(1,10,49,39)
+  }
+}

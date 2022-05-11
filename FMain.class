@@ -1,0 +1,65 @@
+' Gambas class file
+
+Public p As Picture
+
+
+
+Public Sub form_Close()
+  
+  Timer1.Enabled = False
+  
+End
+
+Public Sub Form_Open()
+Dim f1 As File
+f1 = Open "/tmp/board" For Create 
+Close f1
+f1 = Open "/tmp/board.out" For Create 
+Close f1
+f1.Save("/tmp/board", "")
+f1.Save("/tmp/board.out", "")
+  
+
+End
+
+Public Sub Button1_Click()
+Dim f1 As File
+Dim a As String 
+Dim aa As String 
+
+f1 = Open "/tmp/board" For Create 
+Close f1
+  f1.Save("/tmp/board", "board\n")    
+  Sleep 1
+    Shell "netcat " & TextBox1.Text & " 8080  < /tmp/board > /tmp/board.out"
+  Sleep 1
+Timer1.Enabled = True
+p = Picture.Load("/tmp/board.out")
+PictureBox1.Picture = p
+  PictureBox1.refresh()
+
+Finally
+  
+Catch
+ 
+End
+
+
+Public Sub Timer1_Timer()
+Dim f1 As File
+Dim a As String 
+Dim aa As String 
+f1 = Open "/tmp/board" For Create 
+Close f1
+  f1.Save("/tmp/board", "board\n")    
+  Sleep 1
+  Shell "netcat " & TextBox1.Text & " 8080  < /tmp/board > /tmp/board.out"
+  Sleep 1
+p = Picture.Load("/tmp/board.out")
+PictureBox1.Picture = p
+  PictureBox1.refresh()
+Finally
+  
+Catch
+ 
+End
